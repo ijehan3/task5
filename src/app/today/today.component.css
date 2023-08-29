@@ -1,0 +1,27 @@
+agm-map{
+    height: 25rem;
+}
+
+.temp {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.weather-description {
+    font-style: italic;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.table {
+    margin-top: 20px;
+}
+
+#txt{
+    margin-right: 20px;
+}
+
+#error{
+    background-color: palevioletred;
+    color: red;
+}

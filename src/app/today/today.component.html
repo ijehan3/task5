@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+
+        <div class="col-sm-12 text-center">
+            <div class="input-group mt-5">
+                <input class="form-control" id="txt" type="text" #userInput placeholder="Enter city name">
+                <div class="input-group-append">
+                    <button class="input-group-text btn btn-outline-primary  btn-lg" (click)="getCity(userInput.value)">Search</button>
+                </div>
+            </div>
+            <h5 class="align-center mt-2">Current weather and forecasts in your city...</h5>
+            <h2 class="text-danger">Weather in {{ weather.name }}, {{ weather.sys.country }}</h2>
+        </div>
+        <div class="col-sm-12">
+            <fa-icon [icon]="getWeatherIcon()"></fa-icon>
+             <span class="temp">
+              <!--  <img src="assets/{{ weather.weather[0].icon }}.png" alt="01d.png"> -->
+                {{ weather.main.temp | number: '1.0-0' }}, {{ convertTemperature(weather.main.temp) }} &#176; {{ temperatureUnit }}
+            </span>
+            <p class="weather-description text-primary">{{ weather.weather[0].description }}</p>
+        </div>
+
+
+        <table class="table table-light table-striped table-bordered text-center">
+
+            <tbody>
+                <tr class="table-dark">
+                    <td>Humidity</td><td>{{ weather.main.humidity }}%</td>
+                </tr>
+                <tr class="table-secondary">
+                    <td>Pressure</td><td>{{ weather.main.pressure }} hpa</td>
+                </tr>
+                <tr class="table-dark">
+                    <td>Sunrise</td><td>{{ weather.sys.sunrise * 1000 | date:'H:mm' }}</td>
+                </tr>
+                <tr class="table-secondary">
+                    <td>Sunset</td><td>{{ weather.sys.sunset * 1000 | date:'H:mm'}}</td>
+                </tr>
+                <tr class="table-dark">
+                    <td>Geo coords</td><td>[{{ weather.coord.lat }}, {{ weather.coord.lon }}]</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- <agm-map [latitude]="lat" [longitude]="lon">
+            <agm-marker [latitude]="lat" [longitude]="lon"></agm-marker>
+        </agm-map> -->
+        <div>
+          <h5 class="mt-3" id="error">{{ errorMessage }}</h5>
+        </div>
+
+        <div>
+            <button class="btn btn-success bt-lg w-50 mb-4 mt-2" (click)="toggleTemperatureUnit()">
+                Toggle Temperature Unit
+            </button>            
+        </div>
+
+        <button class="btn btn-primary bt-lg w-50" (click)="addToFavorites(weather.name)">Add to Favorites</button>
+
+        <h3>Favorite Cities</h3>
+<ul>
+    <li *ngFor="let city of favoriteCities">{{ city }}</li>
+</ul>
+<div>
+    <button class="btn btn-danger bt-lg w-50" (click)="clearLocalStorage()">Clear Local Storage</button>
+</div>
+
+
+        </div>
+        </div>
+        
